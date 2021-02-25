@@ -12,10 +12,16 @@ msgstr ""
 "Language: \n"
 
 msgid "plugins.generic.citationStyleLanguage.displayName"
-msgstr "Язык оформления цитат CSL"
+msgstr "Язык оформления цитат CSL (CUSTOM)"
 
 msgid "plugins.generic.citationStyleLanguage.description"
-msgstr "Позволяет читателям получить библиографическую ссылку на опубликованную статью в одном из нескольких форматов, поддерживаемых языком оформления цитат CSL."
+msgstr "Позволяет читателям получить библиографическую ссылку на опубликованную статью в одном из нескольких форматов, поддерживаемых языком оформления цитат CSL. (изменен под нужды МБЖ)"
+
+msgid "plugins.generic.citationStyleLanguage.style.gost"
+msgstr "ГОСТ"
+
+msgid "plugins.generic.citationStyleLanguage.style.cbe"
+msgstr "CBE"
 
 msgid "plugins.generic.citationStyleLanguage.style.acm-sig-proceedings"
 msgstr "ACM"

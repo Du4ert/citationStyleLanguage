@@ -64,8 +64,19 @@ class CitationStyleLanguagePlugin extends GenericPlugin {
 
 		$defaults = array(
 			array(
+				'id' => 'gost',
+				'title' => __('plugins.generic.citationStyleLanguage.style.gost'),
+				'isEnabled' => true,
+				'isPrimary' => true,
+			),
+			array(
 				'id' => 'acm-sig-proceedings',
 				'title' => __('plugins.generic.citationStyleLanguage.style.acm-sig-proceedings'),
+				'isEnabled' => true,
+			),
+			array(
+				'id' => 'cbe',
+				'title' => __('plugins.generic.citationStyleLanguage.style.cbe'),
 				'isEnabled' => true,
 			),
 			array(
