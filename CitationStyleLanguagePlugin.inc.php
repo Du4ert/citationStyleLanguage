@@ -321,13 +321,14 @@ class CitationStyleLanguagePlugin extends GenericPlugin {
 		$issueDao = DAORegistry::getDAO('IssueDAO'); /* @var $issueDao IssueDAO */
 		$issue = $issue ?? $issueDao->getById($publication->getData('issueId'));
 		$context = $request->getContext();
+		$appLocale = AppLocale::getLocale();
 
 		import('lib.pkp.classes.core.PKPString');
 
 		$citationData = new stdClass();
 		$citationData->type = 'article-journal';
 		$citationData->id = $article->getId();
-		$citationData->title = htmlspecialchars($publication->getLocalizedFullTitle());
+		$citationData->title = $publication->getLocalizedFullTitle();
 		$citationData->{'container-title'} = htmlspecialchars($context->getLocalizedName());
 		$citationData->{'publisher-place'} = $this->getSetting($context->getId(), 'publisherLocation');
 		$citationData->abstract = htmlspecialchars($publication->getLocalizedData('abstract'));
@@ -364,10 +365,10 @@ class CitationStyleLanguagePlugin extends GenericPlugin {
 			foreach ($authors as $author) {
 				$currentAuthor = new stdClass();
 				if (empty($author->getLocalizedFamilyName())) {
-					$currentAuthor->family = htmlspecialchars($author->getLocalizedGivenName());
+					$currentAuthor->family = htmlspecialchars($author->getGivenName($appLocale));
 				} else {
-					$currentAuthor->family = htmlspecialchars($author->getLocalizedFamilyName());
-					$currentAuthor->given = htmlspecialchars($author->getLocalizedGivenName());
+					$currentAuthor->family = htmlspecialchars($author->getFamilyName($appLocale));
+					$currentAuthor->given = htmlspecialchars($author->getGivenName($appLocale));
 				}
 				$citationData->author[] = $currentAuthor;
 			}
@@ -484,9 +485,9 @@ class CitationStyleLanguagePlugin extends GenericPlugin {
 		// See: https://github.com/citation-style-language/styles/issues/2831
 		$citation = str_replace('\n', "\n", $citation);
 
-		$filename = substr(preg_replace('/[^a-zA-Z0-9_.-]/', '', str_replace(' ', '-', $article->getLocalizedTitle())), 0, 60);
+        $encodedFilename = urlencode(substr($article->getLocalizedTitle(), 0, 60)) . '.' . $styleConfig['fileExtension'];
 
-		header('Content-Disposition: attachment; filename="' . $filename . '.' . $styleConfig['fileExtension'] . '"');
+		header("Content-Disposition: attachment; filename*=UTF-8''\"$encodedFilename\"");
 		header('Content-Type: ' . $styleConfig['contentType']);
 		echo $citation;
 		exit;
