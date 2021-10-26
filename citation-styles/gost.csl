@@ -45,7 +45,7 @@
       <term name="issue-custom" form="short">no.</term>
       <term name="pages-custom" form="short">pp.</term>
       <term name="delimiter-custom2">. </term>
-      <term name="delimiter-custom">,</term>
+      <term name="delimiter-custom">, </term>
     </terms>
   </locale>
   <locale xml:lang="ru">
